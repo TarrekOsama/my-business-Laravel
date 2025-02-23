@@ -10,8 +10,10 @@
 
 </head>
 <body>
+    @if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form']))
+        <x-navbar/>
 {{-- Navbar --}}
-<x-navbar/>
+    @endif
 
 {{--Display success messages--}}
     <div aria-live="polite" aria-atomic="true" class="position-relative">
@@ -28,8 +30,11 @@
     {{ $slot }}
 </div>
 
-{{-- Footer --}}
+@if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form']))
 <x-footer/>
+{{-- Navbar --}}
+@endif
+{{-- Footer --}}
 
 <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script>
