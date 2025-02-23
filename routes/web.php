@@ -4,13 +4,17 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 //home route
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//admin dashboard route
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+//admin guard route
+Route::middleware(AdminMiddleware::class)->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+});
 
 //user login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login.form');
