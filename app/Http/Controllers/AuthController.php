@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -11,6 +12,33 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+
+    public function login(Request $request)
+    {
+        // validate the form data
+        $credentials=$request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|min:8'
+        ]);
+
+        // attempt to log the user in
+        if (Auth:: attempt($credentials)) {
+            // redirect to home page
+            return redirect()->route('home');
+        }
+        else{
+            // redirect back to the login page
+            return back()->withErrors([
+                'login-error' => 'Invalid email or password'
+            ]);
+        }
+
+    }
+
+
+
+
 
     public function showRegisterForm()
     {
