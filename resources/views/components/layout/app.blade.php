@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    @if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form']))
+    @if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form', 'admin.login.form']))
         <x-navbar/>
 {{-- Navbar --}}
     @endif
@@ -32,7 +32,7 @@
     {{ $slot }}
 </div>
 
-@if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form']))
+@if(!in_array(Route::currentRouteName(), ['auth.login.form', 'auth.register.form', 'admin.login.form']))
 <x-footer/>
 {{-- Navbar --}}
 @endif

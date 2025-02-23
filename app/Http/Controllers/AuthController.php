@@ -8,18 +8,20 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+
+    //login function
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-
+//login function
     public function login(Request $request)
     {
         // validate the form data
         $credentials = $request->validate([
             'email' => 'required|email|exists:users',
-            'password' => 'required|min:8'
+            'password' => 'required'
         ]);
 
         // attempt to log the user in
@@ -48,13 +50,14 @@ class AuthController extends Controller
 
 
 
-
+//register function
 
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
+    //register function
     public function register(Request $request)
     {
         // validate the form data
@@ -74,4 +77,6 @@ class AuthController extends Controller
         // redirect to home page
         return redirect()->route('auth.login.form');
     }
+
+
 }
