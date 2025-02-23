@@ -15,9 +15,34 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Cart</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('auth.login.form')}}">Login</a>
-                </li>
+                 @if (Auth::check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            🛒 Cart <span class="badge bg-danger">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button"
+                           data-bs-toggle="dropdown">
+                            👤 {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="#">Profile</a>
+                            </li>
+                            <li>
+                                <form action="{{ route('auth.logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('auth.login.form') }}">Login</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

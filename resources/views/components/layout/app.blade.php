@@ -15,16 +15,18 @@
 {{-- Navbar --}}
     @endif
 
-{{--Display success messages--}}
+@if (session()->has('success'))
     <div aria-live="polite" aria-atomic="true" class="position-relative">
         <div class="toast-container top-0 end-0 p-3">
             <!-- Then put toasts within -->
             <div id="successToast" class="toast text-white bg-success toast-custom" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-body">
+                    {{ session('success') }}
                 </div>
             </div>
         </div>
     </div>
+@endif
 
 <div class="container">
     {{ $slot }}
