@@ -41,7 +41,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Update</button>
-                    <a href="" class="btn btn-secondary">Cancel</a>
+                    <a href="{{route('admin.categories.index')}}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

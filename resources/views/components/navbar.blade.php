@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Shop</a>
@@ -28,7 +28,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">Profile</a>
                             </li>
                             <li>
                                 <form action="{{ route('auth.logout') }}" method="POST">
