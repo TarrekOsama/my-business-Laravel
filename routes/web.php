@@ -13,16 +13,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //admin guard route
 Route::middleware(AdminMiddleware::class)
-->name('admin.')
-->prefix('admin')
-->group(function () {
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
 
-    //admin dashboard route
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        //admin dashboard route
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    //admin category routes
-Route::resource('categories', CategoryController::class)->except(['show']);
-});
+        //admin category routes
+        Route::resource('categories', CategoryController::class)->except(['show']);
+    });
 
 //user login routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login.form');
@@ -37,4 +37,3 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::get('/admin/login', [AdminAuthController::class, 'showAdminLoginForm'])->name('admin.login.form');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-

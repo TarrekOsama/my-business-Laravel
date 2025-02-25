@@ -4,7 +4,7 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="{{route('admin.categories.update')}} method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <!-- Category Name -->
@@ -34,7 +34,7 @@
 
                         @if($category->image)
                             <div class="mt-2">
-                                <img src="" alt=""
+                                <img src="{{asset($category->image)}}" alt="{{ $category->name }}"
                                      style="max-height: 150px;">
                             </div>
                         @endif

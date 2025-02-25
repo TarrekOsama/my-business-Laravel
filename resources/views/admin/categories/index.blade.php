@@ -31,9 +31,9 @@
                             @endif
                         </td>
                         <td>
-                            <a href="" class="btn btn-sm btn-warning">✏
+                            <a href="{{route('admin.categories.edit',$category)}}" class="btn btn-sm btn-warning">✏
                                 Edit</a>
-                            <form action="" method="POST"
+                            <form action="{{route('admin.categories.destroy', $category)}}" method="POST"
                                   class="d-inline delete-form">
                                 @csrf
                                 @method('DELETE')
