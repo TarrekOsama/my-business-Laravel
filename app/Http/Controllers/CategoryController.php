@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -21,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -29,7 +30,33 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|min:3|max:255|regex:/^[a-zA-Z\s]+$/|unique:categories,name',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ]);
+
+        $categoryData = $request->except('image');
+
+        //upload image
+        if ($request->hasFile('image')) {
+            $extenstion = $request->image->getClientOriginalExtension();
+            $imgName = time() . '.' . $extenstion;
+
+            try {
+
+                $imagePath= $request->image->storeAs('category_images', $imgName, 'public');
+                $categoryData['image'] = 'storage/' . $imagePath;
+            } catch (Exception $e) {
+                return back()->with('error', 'Image upload failed.');
+            }
+        }else{
+            $categoryData['image'] = null;
+        }
+
+        $categoryData['slug'] = strtolower(str_replace(' ', '_', $categoryData['name']));
+
+        Category::create($categoryData);
+        return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -45,7 +72,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.categories.edit');
     }
 
     /**

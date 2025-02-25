@@ -22,8 +22,13 @@
                         <td>{{$category->name }}</td>
                         <td>{{$category->slug}}</td>
                         <td>
-                            <img src="" alt="{{ $category->name }}"
+                            @if($category->image)
+                            <img src="{{asset($category->image)}}" alt="{{ $category->name }}"
                                  style="height: 50px;">
+                            @else
+                            No Image
+
+                            @endif
                         </td>
                         <td>
                             <a href="" class="btn btn-sm btn-warning">✏

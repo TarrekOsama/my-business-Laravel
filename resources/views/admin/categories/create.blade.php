@@ -4,11 +4,12 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.categories.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Category Name</label>
                         <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror">
+
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -23,7 +24,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Save</button>
-                    <a href="" class="btn btn-secondary">Cancel</a>
+                    <a href="{{route('admin.categories.index')}}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

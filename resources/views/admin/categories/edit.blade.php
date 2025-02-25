@@ -4,10 +4,9 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.categories.update')}} method="POST" enctype="multipart/form-data">
                     @csrf
-                    {{-- use PUT method here --}}
-
+                    @method('PUT')
                     <!-- Category Name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Category Name</label>
