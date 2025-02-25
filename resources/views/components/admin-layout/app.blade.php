@@ -65,7 +65,7 @@
                 <a href="#" class="nav-link text-white">⚙️ Settings</a>
             </li>
             <li class="nav-item mt-4">
-                <form action="" method="POST">
+                <form action="{{route('admin.logout')}}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger w-100">Logout</button>
                 </form>
