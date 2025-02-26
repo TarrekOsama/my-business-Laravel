@@ -2,7 +2,11 @@
     <div class="container mt-4">
         <h2>📂 Categories Management</h2>
         <a href="{{route('admin.categories.create')}}" class="btn btn-primary mb-3">➕ Add New Category</a>
-
+@if ($categories->isEmpty())
+        <div class="alert alert-warning">
+            No categories found.
+        </div>
+        @else
         <div class="card shadow">
             <div class="card-body">
                 <table class="table table-striped">
@@ -47,5 +51,8 @@
             </div>
             <div class="mx-2"></div>
         </div>
+    
+@endif
+        
     </div>
 </x-admin-layout.app>
