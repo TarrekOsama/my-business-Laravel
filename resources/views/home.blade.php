@@ -18,7 +18,6 @@
                         </a>
                     </div>
                 @endforeach
-                {{-- endforeach --}}
             </div>
         </section>
     </div>

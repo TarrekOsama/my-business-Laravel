@@ -40,6 +40,9 @@ class UserController extends Controller
                 'regex:/^(010|011|012|015)\d{8}$/'
             ],
             'address' => 'required|string|max:200|min:5',
+            'current_password' => 'nullable|required_with:password|current_password',
+            'password' => 'nullable|min:8|confirmed',
+            
         ]);
 
         // Update the user's profile
@@ -48,10 +51,16 @@ class UserController extends Controller
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
+            
         ]);
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
 
         // Redirect back to the profile page with a success message
         return redirect()->route('users.show', $user->id)->with('success', 'Profile updated successfully!');
     }
     }
-
