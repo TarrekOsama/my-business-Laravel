@@ -4,9 +4,9 @@
 
         <div class="card shadow">
             <div class="card-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{route('admin.products.update',$product)}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    {{-- PUT method here --}}
+                    @method('PUT')
 
                     <!-- Product Name -->
                     <div class="mb-3">
@@ -71,25 +71,28 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
 
-                        {{-- check if the product image exist --}}
+                        @if($product->image)
                         <div class="mt-2">
-                            <img src="" alt=""
+                            <img src="{{asset($product->image)}}" alt="{{$product->name}}"
                                  style="max-height: 150px;">
                         </div>
-                        {{-- end if --}}
+                        @endif
                     </div>
 
                     <!-- Categories -->
                     <div class="mb-3">
                         <label for="categories" class="form-label">Categories</label>
-                        {{-- name must be of type array (categories[])--}}
-                        <select name="" id="categories" class="form-control" multiple>
-                            {{-- loop in categories array to display it --}}
+                        <select name="categories[]" id="categories" class="form-control" multiple>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ in_array($category->id, $product->categories->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
 
                     <button type="submit" class="btn btn-success">Update</button>
-                    <a href="" class="btn btn-secondary">Cancel</a>
+                    <a href="{{route('admin.products.index')}}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

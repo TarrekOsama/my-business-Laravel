@@ -87,15 +87,6 @@ class CategoryController extends Controller
      */
 
 
-
-
-
-
-
-
-
-
-
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -122,7 +113,7 @@ class CategoryController extends Controller
                 return back()->with('error', 'Image upload failed.');
             }
         } else {
-            $categoryData['image'] = null;
+            $categoryData['image'] = $category->image;
         }
 
         if ($categoryData['name'] != $category->name) {
