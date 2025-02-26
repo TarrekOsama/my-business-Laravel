@@ -50,7 +50,7 @@
                 <a href="{{route('admin.dashboard')}}" class="nav-link text-white">📊 Dashboard</a>
             </li>
             <li class="nav-item mb-2">
-                <a href="" class="nav-link text-white">🛍️ Products</a>
+                <a href="{{route('admin.products.index')}}" class="nav-link text-white">🛍️ Products</a>
             </li>
             <li class="nav-item mb-2">
                 <a href="{{route('admin.categories.index')}}" class="nav-link text-white">📂 Categories</a>
