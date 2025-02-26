@@ -113,7 +113,7 @@ class CategoryController extends Controller
                 return back()->with('error', 'Image upload failed.');
             }
         } else {
-            $categoryData['image'] = $category->image;
+            $categoryData['image'] = null;
         }
 
         if ($categoryData['name'] != $category->name) {
