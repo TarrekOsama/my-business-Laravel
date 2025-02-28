@@ -24,8 +24,11 @@ class AdminAuthController extends Controller
 
         // attempt to log the user in
         if (Auth::guard('admin')->attempt($credentials)) {
+            if(Auth::guard('admin')->user()->role == 'super_admin'){
+                return redirect()->route('admin.dashboard')->with('success', 'Super Admin logged in successfully');
+            }else{
             // redirect to home page
-            return redirect()->route('admin.dashboard')->with('success', 'Admin logged in successfully');
+            return redirect()->route('admin.products.index')->with('success', 'Admin logged in successfully');}
         } else {
             // redirect back to the login page
             return back()->withErrors([
