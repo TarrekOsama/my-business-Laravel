@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(RegisterFormRequest $request) {
-        
+    public function register(RegisterFormRequest $request)
+    {
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -28,51 +29,52 @@ class AuthController extends Controller
             'token' => $token,
             'user' => $user
         ]);
-    
-    
-    
-    
     }
 
 
-    public function login(LoginFormRequest $request) {
-   
-        $credentials = $request ->validated();
+    public function login(LoginFormRequest $request)
+    {
 
-    // attempt to log the user in
-    if (Auth::attempt($credentials)) {
+        $credentials = $request->validated();
 
-        //authentication passed
-        $user = Auth::user();
+        // attempt to log the user in
+        if (Auth::attempt($credentials)) {
 
-        //create a token 
-        $token = $user->createToken('auth_token')->plainTextToken;
+            //authentication passed
+            $user = Auth::user();
+
+            //create a token 
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'token' => $token,
+                'user' => $user
+            ]);
+        }
 
         return response()->json([
-            'token' => $token,
-            'user' => $user
-        ]);
+            'error' => 'Invalid login details'
+        ], 401);
     }
 
-    return response()->json([
-        'error' => 'Invalid login details'
-    ], 401);
-    }
 
-    
     public function logout(Request $request)
     {
+        // Check if the user is authenticated
+        if (!$request->user()) {
+            return response()->json([
+                'message' => 'User not authenticated'
+            ], 401); // 401 Unauthorized
+        }
+
         // Revoke the token that was used to authenticate the current request
         $request->user()->currentAccessToken()->delete();
-    
+
+        // to  Revoke all tokens for the authenticated user
+        // $request->user()->tokens()->delete();
+
         return response()->json([
             'message' => 'Successfully logged out'
         ]);
     }
-
-
-
- 
-
 }
-

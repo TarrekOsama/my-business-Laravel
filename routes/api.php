@@ -27,5 +27,6 @@ Route::post('/admin/login', [AdminAuthController::class, 'login']);
 //admin middleware  by token base sanctum
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin/products', [ProductController::class, 'index']);
+    Route::post('/logout', [AuthController::class, 'logout']);
     });
     
