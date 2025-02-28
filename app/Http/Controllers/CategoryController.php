@@ -29,12 +29,6 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
-
-
-
-
-
     public function store(Request $request)
     {
         $request->validate([
@@ -65,7 +59,6 @@ class CategoryController extends Controller
         Category::create($categoryData);
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -73,7 +66,6 @@ class CategoryController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -81,12 +73,9 @@ class CategoryController extends Controller
     {
         return view('admin.categories.edit', compact('category'));
     }
-
     /**
      * Update the specified resource in storage.
      */
-
-
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -112,9 +101,8 @@ class CategoryController extends Controller
             } catch (Exception $e) {
                 return back()->with('error', 'Image upload failed.');
             }
-        } else {
-            $categoryData['image'] = null;
-        }
+        } 
+        
 
         if ($categoryData['name'] != $category->name) {
             $categoryData['slug'] = strtolower(str_replace(' ', '_', $categoryData['name']));
@@ -124,18 +112,6 @@ class CategoryController extends Controller
         
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -146,8 +122,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
     
-    
-
     protected function deleteOldImage($category)
     {
         if ($category->image) {
